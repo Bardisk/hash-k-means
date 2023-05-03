@@ -79,6 +79,9 @@ initial:
       if (centers[i] - samples[sample] < centers[representor[sample]] - samples[sample]) {
         representor[sample] = i;
         min_dist[sample] = (centers[i] - samples[sample]) * (centers[i] - samples[sample]) * muls[samples[sample]];
+#ifdef NO_KMEANSXX
+        min_dist[sample] = min_dist[sample] > 0 ? 1 : 0;
+#endif
 #ifdef DB
         fprintf(stderr, "%016llx %016llx %llu\n", centers[i].get_value(), samples[sample].get_value(), centers[i] - samples[sample]);
 #endif
@@ -88,6 +91,7 @@ initial:
 
   fprintf(stderr, "Initialization Completed!\n");
   set_members();
+  report();
 
   while(t--) {
     for (int i = 0; i < center_cnt; i++) center_nxt(i);
