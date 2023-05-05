@@ -26,6 +26,10 @@ int main(int argc, char *argv[]) {
     {
       case 'c':
         sscanf(optarg, "%d", &center_cnt);
+        if (center_cnt > MAX_CLSTR) {
+          fprintf(stderr, "too large number of clusters, change to %d", MAX_CLSTR);
+          center_cnt = MAX_CLSTR;
+        }
         break;
       case 't':
         sscanf(optarg, "%d", &t);
@@ -37,6 +41,7 @@ int main(int argc, char *argv[]) {
 
   preprocessor();
   for (auto item : muls) {
+    assert(sample_cnt < MAX_SAMPLE);
     samples[sample_cnt++] = hashtype(item.first);
   }
   fprintf(stderr, "all sample count: %d\n", overall_sample_cnt);

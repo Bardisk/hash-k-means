@@ -38,7 +38,7 @@ $(BUILD_DIR)/hash-k-means: $(OBJS)
 	@$(CXX) -o $(BUILD_DIR)/hash-k-means $(OBJS)
 
 run: $(BUILD_DIR)/hash-k-means
-	@$(BUILD_DIR)/hash-k-means
+	@$(BUILD_DIR)/hash-k-means -t 5 -c 4096 <hashlist.txt >ans.txt
 
 clean:
 	-@rm -r build

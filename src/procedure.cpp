@@ -62,6 +62,7 @@ long long report() {
 }
 
 void dumpans() {
+  printf("%d\n", overall_sample_cnt);
   for (int i = 0; i < center_cnt; i++) {
     int cnt = 0;
     for (auto member : members[i])
